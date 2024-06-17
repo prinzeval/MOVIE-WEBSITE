@@ -1,0 +1,239 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .header {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            margin-bottom: 20px;
+        }
+
+        .form .field label {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .segment {
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .segment:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        .header .label {
+            margin-top: 10px;
+        }
+
+        .ui.button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui container">
+        <h1 class="ui center aligned header">Todo App</h1>
+
+        <form class="ui form" action="/add" method="post">
+            <div class="field">
+                <label>Todo Title</label>
+                <input type="text" name="title" placeholder="Enter Todo...">
+            </div>
+            <button class="ui blue button" type="submit">Add</button>
+        </form>
+
+        <hr>
+
+        {% for todo in todo_list %}
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="twelve wide column">
+                    <p class="ui big header">{{todo.id }} | {{ todo.title }}</p>
+                </div>
+                <div class="four wide column">
+                    {% if todo.complete == False %}
+                    <span class="ui red right floated label">Not Complete</span>
+                    {% else %}
+                    <span class="ui green right floated label">Completed</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="ui buttons">
+                <a class="ui primary button" href="/update/{{ todo.id }}">Update</a>
+                <a class="ui negative button" href="/delete/{{ todo.id }}">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html> -->
+
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Movie AP</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">AP</h1>
+            </div>
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li class="menu-list-item active">Home</li>
+                    <li class="menu-list-item">Movies</li>
+                    <li class="menu-list-item">Series</li>
+                    <li class="menu-list-item">Popular</li>
+                    <li class="menu-list-item">Trends</li>
+                </ul>
+            </div>
+            <div class="profile-container">
+                <img class="profile-picture" src="/static/img/VALLOGOS.jpg" alt="">
+                <div class="profile-text-container">
+                    <span class="profile-text">Profile</span>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <i class="left-menu-icon fas fa-search"></i>
+        <i class="left-menu-icon fas fa-home"></i>
+        <i class="left-menu-icon fas fa-users"></i>
+        <i class="left-menu-icon fas fa-bookmark"></i>
+        <i class="left-menu-icon fas fa-tv"></i>
+        <i class="left-menu-icon fas fa-hourglass-start"></i>
+        <i class="left-menu-icon fas fa-shopping-cart"></i>
+    </div>
+
+    <div class="container">
+        <div class="content-container">   
+            <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://img.hdtoday.tv/xxrz/250x400/394/c1/11/c1117dd387c50a05685c73c2c20069d4/c1117dd387c50a05685c73c2c20069d4.jpg');">
+                <img class="featured-title" src="" alt="">
+                <p class="featured-desc">THIS IS A MOVIE OF A GUY NAMED VALENTINE WHO WAS A NICE GUY BUT PEOPLE KEPT ON TROUBLING HIM ALL THE TIME AND THEN HE GOT ANGRY LOL THE END !!! ...</p>
+                <button class="featured-button">WATCH NOW</button>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">NEW RELEASES</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for movied in movies %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://cdn.upmovies.net/TCMN0DJ.jpg" alt="Movie Image">
+                            <span class="movie-list-item-title">Her</span>
+                            <p class="movie-list-item-desc">{{ movied.description }}</p>
+                            <button class="movie-list-item-button">Watch Now</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">ASIAN DRAMAS</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for movied in movies %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://cdn.upmovies.net/9ID8Xpn.jpeg" alt="Movie Image">
+                            <span class="movie-list-item-title">{{ movied.title }}</span>
+                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.</p>
+                            <button class="movie-list-item-button">Watch</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+
+            <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('/static/Img/f-2.jpg');">
+                <img class="featured-title" src="/static/Img/f-t-2.png" alt="">
+                <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.</p>
+                <button class="featured-button">WATCH</button>
+            </div>
+
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">ANIMES</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for anime in movies %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://cdn.upmovies.net/B669k52.jpg" alt="Movie Image">
+                            <span class="movie-list-item-title">{{anime.title}}</span>
+                            <p class="movie-list-item-desc">{{anime.description}}</p>
+                            <button class="movie-list-item-button">Watch Now</button> 
+                        </div>
+                        {% endfor %}  
+                        <!-- Add more new releases here using the same structure -->
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">CARTOON</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for anime in movies %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://cdn.upmovies.net/MV5BYmU1ZGRkNDMtODFiNy00ZjgyLWJlMzktY2MyNWJjODY4MTBmXkEyXkFqcGdeQXVyMzM4NjcxOTc@._V1_SX300.jpg" alt="Movie Image">
+                            <span class="movie-list-item-title">{{anime.title}}</span>
+                            <p class="movie-list-item-desc">{{anime.description}}</p>
+                            <button class="movie-list-item-button">Watch Now</button> 
+                        </div>
+                        {% endfor %}  
+                        <!-- Add more new releases here using the same structure -->
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
