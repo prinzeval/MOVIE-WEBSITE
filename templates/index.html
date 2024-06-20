@@ -95,6 +95,52 @@
 
 <!-- templates/index.html -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- first prototype -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,8 +207,8 @@
                     <div class="movie-list">
                         {% for movied in movies %}
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="https://cdn.upmovies.net/TCMN0DJ.jpg" alt="Movie Image">
-                            <span class="movie-list-item-title">Her</span>
+                            <img class="movie-list-item-img" src="{{movied.jpg}}" alt="Movie Image">
+                            <span class="movie-list-item-title">{{movied.title}}</span>
                             <p class="movie-list-item-desc">{{ movied.description }}</p>
                             <button class="movie-list-item-button">Watch Now</button>
                         </div>
@@ -207,7 +253,7 @@
                             <button class="movie-list-item-button">Watch Now</button> 
                         </div>
                         {% endfor %}  
-                        <!-- Add more new releases here using the same structure -->
+                       
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
@@ -224,7 +270,7 @@
                             <button class="movie-list-item-button">Watch Now</button> 
                         </div>
                         {% endfor %}  
-                        <!-- Add more new releases here using the same structure -->
+                        
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
@@ -236,4 +282,43 @@
     <script src="/static/app.js"></script>
 </body>
 
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies with Episode Links</title>
+</head>
+<body>
+    <h1>Movies with Episode Links</h1>
+    
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <h2>{{ movie.movie_title }}</h2>
+            <p><strong>Description:</strong> {{ movie.description }}</p>
+            <p><strong>Genres:</strong> {{ movie.genres }}</p>
+            <p><strong>Country:</strong> {{ movie.country }}</p>
+            <p><strong>Year:</strong> {{ movie.movie_year }}</p>
+            <li>link: <a href="{{ movie.movie_link }}" target="_blank">{{ movie.movie_link }}</a></li>
+            <img src="{{ movie.movie_image }}" alt="Movie Poster" width="200">
+            
+            {% if movie.episode_links %}
+                <p><strong>Episode Links:</strong></p>
+                <ul>
+                    {% for link in movie.episode_links.split(', ') %}
+                        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+
+</body>
 </html>
