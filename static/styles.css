@@ -121,7 +121,11 @@
   }
   
   .featured-content {
+    /* style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('');" */
+    /* background-image: url("https://img.hdtoday.tv/xxrz/250x400/394/c1/11/c1117dd387c50a05685c73c2c20069d4/c1117dd387c50a05685c73c2c20069d4.jpg"); */
+    background-colo
     height: 50vh;
+    background-repeat: no-repeat;
     padding: 50px;
   }
   

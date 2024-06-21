@@ -97,51 +97,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- first prototype -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -149,11 +104,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <title>Movie AP</title>
+    <title>Movie Design</title>
 </head>
-
 <body>
     <div class="navbar">
         <div class="navbar-container">
@@ -196,7 +152,7 @@
 
     <div class="container">
         <div class="content-container">   
-            <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://img.hdtoday.tv/xxrz/250x400/394/c1/11/c1117dd387c50a05685c73c2c20069d4/c1117dd387c50a05685c73c2c20069d4.jpg');">
+            <div class="featured-content">
                 <img class="featured-title" src="" alt="">
                 <p class="featured-desc">THIS IS A MOVIE OF A GUY NAMED VALENTINE WHO WAS A NICE GUY BUT PEOPLE KEPT ON TROUBLING HIM ALL THE TIME AND THEN HE GOT ANGRY LOL THE END !!! ...</p>
                 <button class="featured-button">WATCH NOW</button>
@@ -205,11 +161,11 @@
                 <h1 class="movie-list-title">NEW RELEASES</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
-                        {% for movied in movies %}
+                        {% for movie in movies %}
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{movied.jpg}}" alt="Movie Image">
-                            <span class="movie-list-item-title">{{movied.title}}</span>
-                            <p class="movie-list-item-desc">{{ movied.description }}</p>
+                            <img class="movie-list-item-img" src="{{movie.movie_image}}" alt="Movie Image">
+                            <span class="movie-list-item-title">{{movie.movie_title }}</span>
+                            <p class="movie-list-item-desc">{{ movie.description }}</p>
                             <button class="movie-list-item-button">Watch Now</button>
                         </div>
                         {% endfor %}
@@ -222,10 +178,10 @@
                 <h1 class="movie-list-title">ASIAN DRAMAS</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
-                        {% for movied in movies %}
+                        {% for movie in movies %}
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="https://cdn.upmovies.net/9ID8Xpn.jpeg" alt="Movie Image">
-                            <span class="movie-list-item-title">{{ movied.title }}</span>
+                            <span class="movie-list-item-title">{{ movie.title }}</span>
                             <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.</p>
                             <button class="movie-list-item-button">Watch</button>
                         </div>
@@ -253,7 +209,7 @@
                             <button class="movie-list-item-button">Watch Now</button> 
                         </div>
                         {% endfor %}  
-                       
+                        <!-- Add more new releases here using the same structure -->
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
@@ -270,7 +226,7 @@
                             <button class="movie-list-item-button">Watch Now</button> 
                         </div>
                         {% endfor %}  
-                        
+                        <!-- Add more new releases here using the same structure -->
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
@@ -282,43 +238,4 @@
     <script src="/static/app.js"></script>
 </body>
 
-</html> -->
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies with Episode Links</title>
-</head>
-<body>
-    <h1>Movies with Episode Links</h1>
-    
-    <ul>
-    {% for movie in movies %}
-        <li>
-            <h2>{{ movie.movie_title }}</h2>
-            <p><strong>Description:</strong> {{ movie.description }}</p>
-            <p><strong>Genres:</strong> {{ movie.genres }}</p>
-            <p><strong>Country:</strong> {{ movie.country }}</p>
-            <p><strong>Year:</strong> {{ movie.movie_year }}</p>
-            <li>link: <a href="{{ movie.movie_link }}" target="_blank">{{ movie.movie_link }}</a></li>
-            <img src="{{ movie.movie_image }}" alt="Movie Poster" width="200">
-            
-            {% if movie.episode_links %}
-                <p><strong>Episode Links:</strong></p>
-                <ul>
-                    {% for link in movie.episode_links.split(', ') %}
-                        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-        <hr>
-    {% endfor %}
-    </ul>
-
-</body>
 </html>

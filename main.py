@@ -191,14 +191,16 @@ from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import SessionLocal, engine
 from starlette.templating import Jinja2Templates
-templates = Jinja2Templates(directory="templates")
+from fastapi.staticfiles import StaticFiles
+
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)
 
 # FastAPI app instance
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 # Dependency to get DB session
 def get_db():
     db = SessionLocal()
@@ -213,3 +215,28 @@ def get_all_movie_details(request: Request, db: Session = Depends(get_db)):
     movies = crud.get_all_movie_details(db)
     return templates.TemplateResponse("index.html", {"request": request, "movies": movies})
 
+@app.get("/specific-anime/", response_model=list[schemas.MovieDetailsSchema])
+def read_anime_movies(db: Session = Depends(get_db)):
+    movies = crud.get_anime(db)
+    return movies
+
+@app.get("/specific-asian/",response_model=list[schemas.MovieDetailsSchema])
+def read_asian_movie(db: Session = Depends(get_db)):
+    movies = crud.get_asian_dramas(db)
+    return movies
+
+@app.get("/specific-cartoon/",response_model=list[schemas.MovieDetailsSchema])
+def read_cartoons(db : Session = Depends(get_db)):
+    movies = crud.get_cartoon_dramas(db)
+    return movies
+
+@app.get("/specific-tvseries/",response_model=list[schemas.MovieDetailsSchema])
+def read_tv_series(db : Session = Depends(get_db)):
+    movies = crud.get_tv_series(db)
+    return movies
+
+
+@app.get("/specific-latest-movie/",response_model=list[schemas.MovieDetailsSchema])
+def read_latest_movies(db : Session = Depends(get_db)):
+    movies = crud.get_latest_movies(db)
+    return movies
