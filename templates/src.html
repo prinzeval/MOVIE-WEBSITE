@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ movie.movie_title }}</title>
+<style>
+    body {
+        background-color: #000000;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    .player-container {
+        position: relative; /* Needed for context menu positioning */
+        width: 100%;
+        height: 50%;
+    }
+    .player-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    #contextMenu {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000; /* Ensure it's above everything */
+    }
+    .movie-details {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+    <div class="player-container">
+        <iframe class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                src="{{ movie.movie_link }}" scrolling="no">
+        </iframe>
+        
+        <div id="contextMenu"></div>
+    </div>
+
+    <div class="movie-details">
+        <h2>{{ movie.movie_title }}</h2>
+        <p><strong>Description:</strong> {{ movie.description }}</p>
+        <p><strong>Genres:</strong> {{ movie.genres }}</p>
+        <p><strong>Country:</strong> {{ movie.country }}</p>
+        <p><strong>Year:</strong> {{ movie.movie_year }}</p>
+        <img src="{{ movie.movie_image }}" alt="Movie Poster" width="200">
+        
+        {% if movie.episode_links %}
+            <p><strong>Episode Links:</strong></p>
+            <ul>
+                {% for link in movie.episode_links.split(', ') %}
+                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var iframe = document.querySelector('.player-iframe');
+
+            // Function to send play command to iframe video
+            function playVideo() {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+
+            // Function to enter fullscreen for the iframe
+            function enterFullscreen() {
+                var docEl = iframe.ownerDocument.documentElement;
+                if (docEl.requestFullscreen) {
+                    docEl.requestFullscreen();
+                } else if (docEl.mozRequestFullScreen) {
+                    docEl.mozRequestFullScreen();
+                } else if (docEl.webkitRequestFullscreen) {
+                    docEl.webkitRequestFullscreen();
+                } else if (docEl.msRequestFullscreen) {
+                    docEl.msRequestFullscreen();
+                }
+            }
+
+            // Play the video immediately when loaded
+            iframe.addEventListener('load', function() {
+                playVideo();
+                enterFullscreen();
+            });
+
+            // Right-click handling for video
+            document.addEventListener('contextmenu', function(event) {
+                event.preventDefault(); // Prevent the default context menu
+                var contextMenu = document.getElementById('contextMenu');
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = event.clientX + 'px';
+                contextMenu.style.top = event.clientY + 'px';
+            });
+
+            // Hide context menu on click anywhere else
+            document.addEventListener('click', function(event) {
+                var contextMenu = document.getElementById('contextMenu');
+                contextMenu.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ePlayVid.net - Video Embed</title>
+<style>
+    body {
+        background-color: #000000;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    .player-container {
+        position: relative; /* Needed for context menu positioning */
+        width: 100%;
+        height: 100%;
+    }
+    .player-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    #contextMenu {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000; /* Ensure it's above everything */
+    }
+</style>
+</head>
+<body>
+    <div class="player-container">
+        <iframe class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                src="https://eplayvid.net/watch/e442b25fbb1adf8" scrolling="no">
+        </iframe>
+        
+        <div id="contextMenu"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var iframe = document.querySelector('.player-iframe');
+
+            // Function to send play command to iframe video
+            function playVideo() {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+
+            // Function to enter fullscreen for the iframe
+            function enterFullscreen() {
+                var docEl = iframe.ownerDocument.documentElement;
+                if (docEl.requestFullscreen) {
+                    docEl.requestFullscreen();
+                } else if (docEl.mozRequestFullScreen) {
+                    docEl.mozRequestFullScreen();
+                } else if (docEl.webkitRequestFullscreen) {
+                    docEl.webkitRequestFullscreen();
+                } else if (docEl.msRequestFullscreen) {
+                    docEl.msRequestFullscreen();
+                }
+            }
+
+            // Play the video immediately when loaded
+            iframe.addEventListener('load', function() {
+                playVideo();
+                enterFullscreen();
+            });
+
+            // Right-click handling for video
+            document.addEventListener('contextmenu', function(event) {
+                event.preventDefault(); // Prevent the default context menu
+                var contextMenu = document.getElementById('contextMenu');
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = event.clientX + 'px';
+                contextMenu.style.top = event.clientY + 'px';
+            });
+
+            // Hide context menu on click anywhere else
+            document.addEventListener('click', function(event) {
+                var contextMenu = document.getElementById('contextMenu');
+                contextMenu.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html> -->

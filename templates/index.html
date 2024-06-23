@@ -166,7 +166,9 @@
                             <img class="movie-list-item-img" src="{{movie.movie_image}}" alt="Movie Image">
                             <span class="movie-list-item-title">{{movie.movie_title }}</span>
                             <p class="movie-list-item-desc">{{ movie.description }}</p>
-                            <button class="movie-list-item-button">Watch Now</button>
+                            <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
+                                <button>Watch Now</button>
+                            </a>
                         </div>
                         {% endfor %}
                     </div>

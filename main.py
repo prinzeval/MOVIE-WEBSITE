@@ -186,12 +186,13 @@
 
 # main.py
 
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request,  HTTPException
 from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import SessionLocal, engine
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
 
 
 # Create database tables
@@ -240,3 +241,17 @@ def read_tv_series(db : Session = Depends(get_db)):
 def read_latest_movies(db : Session = Depends(get_db)):
     movies = crud.get_latest_movies(db)
     return movies
+
+@app.get("/search-movies/", response_model=list[schemas.MovieDetailsSchema])
+def search_movies_by_name_endpoint(request: Request, search_query: str, db: Session = Depends(get_db)):
+    movies = crud.search_movies_by_name(db, search_query)
+    return movies
+
+@app.get("/watch/{movie_id}", response_class=HTMLResponse)
+def watch_movie(movie_id: int, request: Request, db: Session = Depends(get_db)):
+    print(f"Fetching movie with ID: {movie_id}")  # Add logging
+    movie = crud.get_movie_by_id(db, movie_id)
+    if not movie:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    print(f"Movie found: {movie.movie_title}")  # Add logging
+    return templates.TemplateResponse("src.html", {"request": request, "movie": movie})

@@ -78,3 +78,9 @@ def get_latest_movies(db: Session):  # work on this valentine after eating
         genre_filters,
         MovieDetails.movie_year == 2020
     ).all()
+
+def search_movies_by_name(db: Session, search_query: str):
+    return db.query(MovieDetails).filter(MovieDetails.movie_title.ilike(f'%{search_query}%')).all()
+
+def get_movie_by_id(db: Session, movie_id: int):
+    return db.query(MovieDetails).filter(MovieDetails.movie_id == movie_id).first()
