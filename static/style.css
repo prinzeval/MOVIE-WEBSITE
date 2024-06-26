@@ -121,11 +121,11 @@
   }
   
   .featured-content {
-    /* style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('');" */
-    /* background-image: url("https://img.hdtoday.tv/xxrz/250x400/394/c1/11/c1117dd387c50a05685c73c2c20069d4/c1117dd387c50a05685c73c2c20069d4.jpg"); */
-    background-colo
-    height: 50vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), black), url('https://e0.pxfuel.com/wallpapers/449/463/desktop-wallpaper-best-movie-action-background.jpg'); 
+    background-size: cover; 
+    background-position: center;
     background-repeat: no-repeat;
+    height: 50vh;
     padding: 50px;
   }
   
