@@ -3,7 +3,7 @@
 # from sqlalchemy.orm import sessionmaker
 
 # # Correctly formatted PostgreSQL database URL
-# SQLALCHEMY_DATABASE_URL = "postgresql://postgres:Vondabaic2020@localhost:5432/TODOLIST"
+
 
 # engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
