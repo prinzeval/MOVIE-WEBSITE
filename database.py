@@ -32,7 +32,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:Vondabaic2020@localhost/movie_data"  # Replace with your database URL
+ # Replace with your database URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
