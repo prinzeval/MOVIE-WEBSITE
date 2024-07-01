@@ -32,7 +32,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
- # Replace with your database URL
+ # input your database connectionn here URL here 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
