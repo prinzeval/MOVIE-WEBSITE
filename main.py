@@ -184,9 +184,18 @@
 #     return movies
 
 
+
+
+
+
+
+
+
+
+
 # main.py
 
-from fastapi import FastAPI, Depends, Request,  HTTPException
+from fastapi import FastAPI, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import SessionLocal, engine
@@ -255,3 +264,7 @@ def watch_movie(movie_id: int, request: Request, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Movie not found")
     print(f"Movie found: {movie.movie_title}")  # Add logging 
     return templates.TemplateResponse("src.html", {"request": request, "movie": movie})
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001)
