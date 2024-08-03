@@ -49,4 +49,5 @@ class MovieDetailsSchema(BaseModel):
     episode_links: Optional[str] = None  # Could also be a list if needed
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
