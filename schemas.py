@@ -30,6 +30,8 @@
 
 # schemas.py
 
+# schemas.py
+
 from pydantic import BaseModel
 from typing import Optional
 
@@ -39,12 +41,12 @@ class MovieDetailsSchema(BaseModel):
     genres: Optional[str] = None
     country: Optional[str] = None
     duration: Optional[str] = None
-    movie_year: Optional[int] = None
+    movie_year: Optional[int] = None  # Changed to int for consistency
     description: Optional[str] = None
     movie_image: Optional[str] = None
     director: Optional[str] = None
     actors: Optional[str] = None
-    episode_links: Optional[str] = None
+    episode_links: Optional[str] = None  # Could also be a list if needed
 
     class Config:
         orm_mode = True
