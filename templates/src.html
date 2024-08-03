@@ -1,120 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ movie.movie_title }}</title>
-<style>
-    body {
-        background-color: #000000;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-family: Arial, sans-serif;
-    }
-    .player-container {
-        position: relative; /* Needed for context menu positioning */
-        width: 100%;
-        height: 50%;
-    }
-    .player-iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    #contextMenu {
-        display: none;
-        position: absolute;
-        background-color: #333;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 1000; /* Ensure it's above everything */
-    }
-    .movie-details {
-        text-align: center;
-        margin-top: 20px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.movie_title }}</title>
+    <link rel="stylesheet" href="/static/src.css">
 </head>
 <body>
-    <div class="player-container">
-        <iframe class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen
-                src="{{ movie.movie_link }}" scrolling="no">
-        </iframe>
-        
-        <div id="contextMenu"></div>
+    <div class="container">
+        <div class="player-container">
+            <iframe class="player-iframe" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" frameborder="0" src="{{ movie.movie_link }}" scrolling="no"></iframe>
+        </div>
+
+        <div class="movie-details">
+            <h2>{{ movie.movie_title }}</h2>
+            <p><strong>Description:</strong> {{ movie.description }}</p>
+            <p><strong>Genres:</strong> {{ movie.genres }}</p>
+            <p><strong>Country:</strong> {{ movie.country }}</p>
+            <p><strong>Year:</strong> {{ movie.movie_year }}</p>
+            <div class="movie-info">
+                <img class="movie-poster" src="{{ movie.movie_image }}" alt="Movie Poster">
+                <button class="download-button" onclick="showDownloadInstructions()">Download</button>
+            </div>
+            
+            {% if movie.episode_links %}
+                <div class="episode-container">
+                    <h3>Episode Links:</h3>
+                    <div class="episode-links">
+                        {% for link in movie.episode_links.split(', ') %}
+                            <div class="episode-item">
+                                <a href="{{ link }}" target="_blank">{{ loop.index }}. {{ link }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
-    <div class="movie-details">
-        <h2>{{ movie.movie_title }}</h2>
-        <p><strong>Description:</strong> {{ movie.description }}</p>
-        <p><strong>Genres:</strong> {{ movie.genres }}</p>
-        <p><strong>Country:</strong> {{ movie.country }}</p>
-        <p><strong>Year:</strong> {{ movie.movie_year }}</p>
-        <img src="{{ movie.movie_image }}" alt="Movie Poster" width="200">
-        
-        {% if movie.episode_links %}
-            <p><strong>Episode Links:</strong></p>
-            <ul>
-                {% for link in movie.episode_links.split(', ') %}
-                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    <div id="downloadInstructions" class="instructions-popup">
+        <p>To download this content, right-click on the video and select "Save video as..."</p>
+        <button onclick="hideDownloadInstructions()">Close</button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var iframe = document.querySelector('.player-iframe');
+        function showDownloadInstructions() {
+            document.getElementById('downloadInstructions').style.display = 'block';
+        }
 
-            // Function to send play command to iframe video
-            function playVideo() {
-                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            }
-
-            // Function to enter fullscreen for the iframe
-            function enterFullscreen() {
-                var docEl = iframe.ownerDocument.documentElement;
-                if (docEl.requestFullscreen) {
-                    docEl.requestFullscreen();
-                } else if (docEl.mozRequestFullScreen) {
-                    docEl.mozRequestFullScreen();
-                } else if (docEl.webkitRequestFullscreen) {
-                    docEl.webkitRequestFullscreen();
-                } else if (docEl.msRequestFullscreen) {
-                    docEl.msRequestFullscreen();
-                }
-            }
-
-            // Play the video immediately when loaded
-            iframe.addEventListener('load', function() {
-                playVideo();
-                enterFullscreen();
-            });
-
-            // Right-click handling for video
-            document.addEventListener('contextmenu', function(event) {
-                event.preventDefault(); // Prevent the default context menu
-                var contextMenu = document.getElementById('contextMenu');
-                contextMenu.style.display = 'block';
-                contextMenu.style.left = event.clientX + 'px';
-                contextMenu.style.top = event.clientY + 'px';
-            });
-
-            // Hide context menu on click anywhere else
-            document.addEventListener('click', function(event) {
-                var contextMenu = document.getElementById('contextMenu');
-                contextMenu.style.display = 'none';
-            });
-        });
+        function hideDownloadInstructions() {
+            document.getElementById('downloadInstructions').style.display = 'none';
+        }
     </script>
 </body>
 </html>
+
 
 
 
