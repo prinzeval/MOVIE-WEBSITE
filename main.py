@@ -220,7 +220,7 @@ def get_db():
         db.close()
 
 # Route to get all MovieDetails
-@app.get("/moviedetails/", response_model=list[schemas.MovieDetailsSchema])
+@app.get("/", response_model=list[schemas.MovieDetailsSchema])
 def get_all_movie_details(request: Request, db: Session = Depends(get_db)):
     movies = crud.get_all_movie_details(db)
     return templates.TemplateResponse("index.html", {"request": request, "movies": movies})
