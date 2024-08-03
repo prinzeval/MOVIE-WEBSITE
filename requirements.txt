@@ -1,4 +1,17 @@
-fastapi
-pymysql
-sqlalchemy
-psycopg2
+# FastAPI framework
+fastapi==0.95.1
+
+# SQLAlchemy for ORM and database interaction
+SQLAlchemy==2.0.20
+
+# PostgreSQL adapter for Python
+psycopg2-binary==2.9.6
+
+# MySQL adapter for Python (if you also work with MySQL)
+pymysql==1.0.2
+
+# Optional: Uvicorn as an ASGI server for running FastAPI applications
+uvicorn==0.22.0
+
+# Jinja2 for templating
+jinja2==3.1.2
