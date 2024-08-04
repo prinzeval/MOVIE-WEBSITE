@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="player-container">
-            <iframe class="player-iframe" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" frameborder="0" src="{{ movie.movie_link }}" scrolling="no"></iframe>
+            <iframe id="player" class="player-iframe" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" frameborder="0" src="{{ movie.movie_link }}" scrolling="no"></iframe>
         </div>
 
         <div class="movie-details">
@@ -29,7 +29,7 @@
                     <div class="episode-links">
                         {% for link in movie.episode_links.split(', ') %}
                             <div class="episode-item">
-                                <a href="{{ link }}" target="_blank">{{ loop.index }}. {{ link }}</a>
+                                <a href="#" onclick="changeEpisode('{{ link }}'); return false;">Episode {{ loop.index }}: {{ link }}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -51,10 +51,14 @@
         function hideDownloadInstructions() {
             document.getElementById('downloadInstructions').style.display = 'none';
         }
+
+        function changeEpisode(link) {
+            var player = document.getElementById('player');
+            player.src = link;
+        }
     </script>
 </body>
 </html>
-
 
 
 
