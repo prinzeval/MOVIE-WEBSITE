@@ -58,8 +58,8 @@ class Movie(Base):
     country = Column(String, nullable=True)
     director = Column(String, nullable=True)
     duration = Column(String, nullable=True)
-    movie_year = Column(Integer, nullable=True)
+    movie_year = Column(String, nullable=True)  # Ensure this matches the actual column type in Supabase
     actors = Column(String, nullable=True)
     description = Column(Text, nullable=True)
     movie_link = Column(String, nullable=True)
-    episode_links = Column(Text, nullable=True)  # Assuming episode_links is a list of URLs stored as a JSON or Text
+    episode_links = Column(Text, nullable=True)  # Ensure this is handled as Text or JSON in Supabase

@@ -41,7 +41,7 @@ class MovieDetailsSchema(BaseModel):
     genres: Optional[str] = None
     country: Optional[str] = None
     duration: Optional[str] = None
-    movie_year: Optional[int] = None  # Changed to int for consistency
+    movie_year: Optional[str] = None  # Changed to int for consistency
     description: Optional[str] = None
     movie_image: Optional[str] = None
     director: Optional[str] = None
