@@ -201,7 +201,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from models import Movie
 import models
-
+import uvicorn  
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)
@@ -287,3 +287,7 @@ def watch_movie(movie_id: int, request: Request, db: Session = Depends(get_db)):
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found")
     return templates.TemplateResponse("src.html", {"request": request, "movie": movie})
+
+# Run the app with Uvicorn if this file is run directly
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
