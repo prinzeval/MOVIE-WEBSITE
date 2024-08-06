@@ -96,6 +96,43 @@
 <!-- templates/index.html -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,54 +141,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <title>Movie Portal</title>
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="navbar-container">
-            <div class="logo-container">
-                <h1 class="logo">AP</h1>
-            </div>
-            <div class="menu-container">
-                <ul class="menu-list">
-                    <li class="menu-list-item {% if not search_results %}active{% endif %}">Home</li>
-                    <li class="menu-list-item">Movies</li>
-                    <li class="menu-list-item">Series</li>
-                    <li class="menu-list-item">Popular</li>
-                    <li class="menu-list-item">Trends</li>
-                </ul>
-            </div>
-            <div class="profile-container">
-                <img class="profile-picture" src="/static/img/VALLOGOS.jpg" alt="">
-                <div class="profile-text-container">
-                    <span class="profile-text">Profile</span>
-                    <i class="fas fa-caret-down"></i>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <h1 class="logo">AP</h1>
                 </div>
-                <div class="toggle">
-                    <i class="fas fa-moon toggle-icon"></i>
-                    <i class="fas fa-sun toggle-icon"></i>
-                    <div class="toggle-ball"></div>
+                <div class="menu-container">
+                    <ul class="menu-list">
+                        <li class="menu-list-item {% if not search_results %}active{% endif %}">Home</li>
+                        <li class="menu-list-item">Movies</li>
+                        <li class="menu-list-item">Series</li>
+                        <li class="menu-list-item">Popular</li>
+                        <li class="menu-list-item">Trends</li>
+                    </ul>
+                </div>
+                <div class="profile-container">
+                    <img class="profile-picture" src="/static/img/VALLOGOS.jpg" alt="Profile Picture">
+                    <div class="profile-text-container">
+                        <span class="profile-text">Profile</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <div class="toggle">
+                        <i class="fas fa-moon toggle-icon"></i>
+                        <i class="fas fa-sun toggle-icon"></i>
+                        <div class="toggle-ball"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </nav>
 
-    <div class="sidebar">
-        <i class="left-menu-icon fas fa-search"></i>
-        <i class="left-menu-icon fas fa-home"></i>
-        <i class="left-menu-icon fas fa-users"></i>
-        <i class="left-menu-icon fas fa-bookmark"></i>
-        <i class="left-menu-icon fas fa-tv"></i>
-        <i class="left-menu-icon fas fa-hourglass-start"></i>
-        <i class="left-menu-icon fas fa-shopping-cart"></i>
-    </div>
+        <aside class="sidebar">
+            <i class="left-menu-icon fas fa-search"></i>
+            <i class="left-menu-icon fas fa-home"></i>
+            <i class="left-menu-icon fas fa-users"></i>
+            <i class="left-menu-icon fas fa-bookmark"></i>
+            <i class="left-menu-icon fas fa-tv"></i>
+            <i class="left-menu-icon fas fa-hourglass-start"></i>
+            <i class="left-menu-icon fas fa-shopping-cart"></i>
+        </aside>
+    </header>
 
-    <div class="container">
+    <main class="container">
         <!-- Search Bar -->
         <div class="search-bar">
             <form action="/search-movies/" method="get">
@@ -162,7 +199,7 @@
 
         <!-- Search Results -->
         {% if search_results %}
-            <div class="movie-list-container">
+            <section class="movie-list-container">
                 <h1 class="movie-list-title">Search Results</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
@@ -179,125 +216,47 @@
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
-            </div>
+            </section>
         {% endif %}
 
         <!-- Featured Content -->
-        <div class="featured-content">
-            <img class="featured-title" src="https://cdn.upmovies.net/leJmm2y.jpeg" alt="">
+        <section class="featured-content">
+            <img class="featured-title" src="https://cdn.upmovies.net/leJmm2y.jpeg" alt="Featured Movie">
             <p class="featured-desc">THIS IS A MOVIE OF A GUY NAMED VALENTINE WHO WAS A NICE GUY BUT PEOPLE KEPT ON TROUBLING HIM ALL THE TIME AND THEN HE GOT ANGRY LOL THE END !!! ...</p>
             <button class="featured-button">WATCH NOW</button>
-        </div>
+        </section>
 
         <!-- Dynamic Movie Lists -->
-        {% if anime_movies %}
-            <div class="movie-list-container">
-                <h1 class="movie-list-title">ANIMES</h1>
-                <div class="movie-list-wrapper">
-                    <div class="movie-list">
-                        {% for movie in anime_movies %}
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                                <p class="movie-list-item-desc">{{ movie.description }}</p>
-                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                                    <button>Watch Now</button>
-                                </a>
-                            </div>
-                        {% endfor %}
+        {% for category, movies, title in [
+            ('anime_movies', anime_movies, 'ANIMES'),
+            ('asian_dramas', asian_dramas, 'ASIAN DRAMAS'),
+            ('cartoons', cartoons, 'CARTOONS'),
+            ('tv_series', tv_series, 'TV SERIES'),
+            ('latest_movies', latest_movies, 'LATEST MOVIES')
+        ] %}
+            {% if movies %}
+                <section class="movie-list-container">
+                    <h1 class="movie-list-title">{{ title }}</h1>
+                    <div class="movie-list-wrapper">
+                        <div class="movie-list">
+                            {% for movie in movies %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
+                                    <span class="movie-list-item-title">{{ movie.movie_title }}</span>
+                                    <p class="movie-list-item-desc">{{ movie.description }}</p>
+                                    <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
+                                        <button>Watch Now</button>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
                     </div>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if asian_dramas %}
-            <div class="movie-list-container">
-                <h1 class="movie-list-title">ASIAN DRAMAS</h1>
-                <div class="movie-list-wrapper">
-                    <div class="movie-list">
-                        {% for movie in asian_dramas %}
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                                <p class="movie-list-item-desc">{{ movie.description }}</p>
-                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                                    <button>Watch Now</button>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if cartoons %}
-            <div class="movie-list-container">
-                <h1 class="movie-list-title">CARTOONS</h1>
-                <div class="movie-list-wrapper">
-                    <div class="movie-list">
-                        {% for movie in cartoons %}
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                                <p class="movie-list-item-desc">{{ movie.description }}</p>
-                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                                    <button>Watch Now</button>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if tv_series %}
-            <div class="movie-list-container">
-                <h1 class="movie-list-title">TV SERIES</h1>
-                <div class="movie-list-wrapper">
-                    <div class="movie-list">
-                        {% for movie in tv_series %}
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                                <p class="movie-list-item-desc">{{ movie.description }}</p>
-                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                                    <button>Watch Now</button>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if latest_movies %}
-            <div class="movie-list-container">
-                <h1 class="movie-list-title">LATEST MOVIES</h1>
-                <div class="movie-list-wrapper">
-                    <div class="movie-list">
-                        {% for movie in latest_movies %}
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                                <p class="movie-list-item-desc">{{ movie.description }}</p>
-                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                                    <button>Watch Now</button>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <i class="fas fa-chevron-right arrow"></i>
-                </div>
-            </div>
-        {% endif %}
-
-    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
+    </main>
 
     <script src="/static/app.js"></script>
 </body>
-
 </html>

@@ -44,22 +44,23 @@
 
 
 # models.py
-
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, String, Text
+from sqlalchemy.dialects.postgresql import UUID
+from uuid import uuid4
 from database import Base
 
 class Movie(Base):
     __tablename__ = 'movies'
     
-    movie_id = Column(Integer, primary_key=True, index=True)
+    movie_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     movie_title = Column(String, index=True)
     movie_image = Column(String, nullable=True)
     genres = Column(String, nullable=True)
     country = Column(String, nullable=True)
     director = Column(String, nullable=True)
     duration = Column(String, nullable=True)
-    movie_year = Column(String, nullable=True)  # Ensure this matches the actual column type in Supabase
+    movie_year = Column(String, nullable=True)
     actors = Column(String, nullable=True)
     description = Column(Text, nullable=True)
     movie_link = Column(String, nullable=True)
-    episode_links = Column(Text, nullable=True)  # Ensure this is handled as Text or JSON in Supabase
+    episode_links = Column(Text, nullable=True)

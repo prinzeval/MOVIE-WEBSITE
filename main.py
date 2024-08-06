@@ -189,8 +189,6 @@
 
 
 
-
-
 from fastapi import FastAPI, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
@@ -199,11 +197,11 @@ from database import SessionLocal, engine
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
-from models import Movie
-import models
+from uuid import UUID
 import uvicorn  
+import models
 
-# Create database tables
+# Create database tables (only for initial setup, avoid running this on every start in production)
 models.Base.metadata.create_all(bind=engine)
 
 # FastAPI app instance
@@ -282,7 +280,7 @@ def read_latest_movies(db: Session = Depends(get_db)):
     return movies
 
 @app.get("/watch/{movie_id}", response_class=HTMLResponse)
-def watch_movie(movie_id: int, request: Request, db: Session = Depends(get_db)):
+def watch_movie(movie_id: UUID, request: Request, db: Session = Depends(get_db)):
     movie = crud.get_movie_by_id(db, movie_id)
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found")

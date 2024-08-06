@@ -1,8 +1,8 @@
+from uuid import UUID
 from sqlalchemy.orm import Session
 from models import Movie
 from sqlalchemy import or_, and_
 from typing import List, Optional
-
 
 def get_all_movie_details(db: Session):
     """
@@ -66,7 +66,7 @@ def search_movies_by_name(db: Session, search_query: str):
     """
     return db.query(Movie).filter(Movie.movie_title.ilike(f'%{search_query}%')).all()
 
-def get_movie_by_id(db: Session, movie_id: int) -> Optional[Movie]:
+def get_movie_by_id(db: Session, movie_id: UUID) -> Optional[Movie]:
     """
     Retrieve a movie by its ID.
     """
