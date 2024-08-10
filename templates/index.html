@@ -75,10 +75,27 @@
         {% endif %}
 
         <!-- Featured Content -->
-        <section class="featured-content">
-            <img class="featured-title" src="https://cdn.upmovies.net/leJmm2y.jpeg" alt="Featured Movie">
-            <p class="featured-desc">THIS IS A MOVIE OF A GUY NAMED VALENTINE WHO WAS A NICE GUY BUT PEOPLE KEPT ON TROUBLING HIM ALL THE TIME AND THEN HE GOT ANGRY LOL THE END !!! ...</p>
-            <button class="featured-button">WATCH NOW</button>
+        <!-- Featured Movies Carousel -->
+        <section class="featured-movies-carousel">
+            <div class="carousel-wrapper">
+                <div class="carousel-items">
+                    <!-- Add movie items here -->
+                    {% for movie in featured_movies %}
+                        <div class="carousel-item">
+                            <img src="{{ movie.movie_image }}" alt="{{ movie.movie_title }}">
+                            <div class="carousel-caption">
+                                <h2>{{ movie.movie_title }}</h2>
+                                <p>{{ movie.description }}</p>
+                                <a href="/watch/{{ movie.movie_id }}" class="watch-now-button">Watch Now</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
         </section>
 
         <!-- Dynamic Movie Lists -->

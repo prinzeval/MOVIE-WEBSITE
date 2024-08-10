@@ -25,7 +25,7 @@ arrows.forEach((arrow, i) => {
   console.log(Math.floor(window.innerWidth / 270));
 });
 
-//TOGGLE
+// TOGGLE
 const ball = document.querySelector(".toggle-ball");
 const items = document.querySelectorAll(
   ".container,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle"
@@ -36,4 +36,33 @@ ball.addEventListener("click", () => {
     item.classList.toggle("active");
   });
   ball.classList.toggle("active");
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const carouselItems = document.querySelector(".carousel-items");
+  const prevButton = document.querySelector(".carousel-prev");
+  const nextButton = document.querySelector(".carousel-next");
+
+  let currentIndex = 0;
+  const itemCount = document.querySelectorAll(".carousel-item").length;
+
+  function showNextSlide() {
+      currentIndex = (currentIndex + 1) % itemCount;
+      updateCarousel();
+  }
+
+  function showPrevSlide() {
+      currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+      updateCarousel();
+  }
+
+  function updateCarousel() {
+      const offset = -currentIndex * 100;
+      carouselItems.style.transform = `translateX(${offset}%)`;
+  }
+
+  prevButton.addEventListener("click", showPrevSlide);
+  nextButton.addEventListener("click", showNextSlide);
+
+  setInterval(showNextSlide, 5000); // Change slide every 5 seconds
 });

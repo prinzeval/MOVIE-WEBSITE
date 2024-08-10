@@ -72,3 +72,4 @@ def get_movie_by_id(db: Session, movie_id: UUID) -> Optional[Movie]:
     Retrieve a movie by its ID.
     """
     return db.query(Movie).filter(Movie.movie_id == movie_id).first()
+
