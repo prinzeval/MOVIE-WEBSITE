@@ -9,6 +9,37 @@
 </head>
 
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <h1 class="logo">AP</h1>
+                </div>
+                <div class="menu-container">
+                    <ul class="menu-list">
+                        <li class="menu-list-item {% if not search_results %}active{% endif %}">Home</li>
+                        <li class="menu-list-item">Movies</li>
+                        <li class="menu-list-item">Series</li>
+                        <li class="menu-list-item">Popular</li>
+                        <li class="menu-list-item">Trends</li>
+                    </ul>
+                </div>
+                <div class="profile-container">
+                    <img class="profile-picture" src="/static/img/VALLOGOS.jpg" alt="Profile Picture">
+                    <div class="profile-text-container">
+                        <span class="profile-text">Profile</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <div class="toggle">
+                        <i class="fas fa-moon toggle-icon"></i>
+                        <i class="fas fa-sun toggle-icon"></i>
+                        <div class="toggle-ball"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
     <div class="container">
         <div class="player-container">
             <iframe id="player" class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen frameborder="0" src="{{ movie.movie_link }}" scrolling="no"></iframe>

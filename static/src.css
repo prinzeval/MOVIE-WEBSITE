@@ -1,21 +1,130 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: #141414;
-    margin: 0;
-    height: 100vh;
+    color: #e5e5e5;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #e5e5e5;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* Navbar styles */
+.navbar {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure navbar is on top */
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    height: 100%;
+    color: white;
+    font-family: "Sen", sans-serif;
+    max-width: 100%; /* Ensure container does not exceed viewport width */
+    margin: 0 auto;
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    font-size: 30px;
+    color: #4dbf00;
+}
+
+.menu-container {
+    flex: 6;
+}
+
+.menu-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list-item {
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.menu-list-item.active {
+    font-weight: bold;
+}
+
+.profile-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profile-text-container {
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.profile-picture {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.toggle {
+    width: 40px;
+    height: 20px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle-icon {
+    color: goldenrod;
+}
+
+.toggle-ball {
+    width: 18px;
+    height: 18px;
+    background-color: black;
+    position: absolute;
+    right: 1px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 1s ease all;
+}
+
+/* Container padding to prevent overlap with the fixed navbar */
 .container {
+    padding-top: 60px; /* Adjust to match the height of the navbar */
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
 
+/* Player and movie details styles */
 .player-container {
     position: relative;
     width: 100%;
@@ -111,9 +220,6 @@ body {
     border-radius: 5px;
     text-align: center;
     overflow: hidden;
-    width: 10rem;
-    height: 1.8rem;
-    
 }
 
 .episode-item:hover {
@@ -124,10 +230,10 @@ body {
     color: #e5e5e5;
     text-decoration: none;
     display: block;
-    font-size: 2rem;
-    text-decoration: none;
+    font-size: 1em;
 }
 
+/* Instructions Popup */
 .instructions-popup {
     display: none;
     position: fixed;
