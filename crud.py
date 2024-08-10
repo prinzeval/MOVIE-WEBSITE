@@ -48,16 +48,17 @@ def get_tv_series(db: Session):
 
 def get_latest_movies(db: Session):
     """
-    Retrieve the latest movies (from the year 2024) from the United States and United Kingdom that belong to specific genres.
+    Retrieve the latest movies (from the years 2020 and 2024) from the United States and United Kingdom that belong to specific genres.
     """
     genres = ['Action', 'Comedy', 'Crime', 'Drama', 'Romance']
     genre_filters = or_(*[Movie.genres.like(f'%{genre}%') for genre in genres])
     country_filters = or_(Movie.country == 'United States', Movie.country == 'United Kingdom')
-    
+    year_filters = or_(Movie.movie_year == '2020', Movie.movie_year == '2024')  # Adjusted to include both years
+
     return db.query(Movie).filter(
         country_filters,
         genre_filters,
-        Movie.movie_year == '2024'  # Keep movie_year as a string
+        year_filters
     ).all()
 
 def search_movies_by_name(db: Session, search_query: str):
