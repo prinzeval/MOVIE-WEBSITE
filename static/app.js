@@ -3,17 +3,22 @@ const movieLists = document.querySelectorAll(".movie-list");
 
 arrows.forEach((arrow, i) => {
   const itemNumber = movieLists[i].querySelectorAll("img").length;
+  const itemWidth = 270; // Width of each movie item
+  const itemsToShow = 6; // Number of items to show at a time
+  const visibleWidth = itemWidth * itemsToShow; // Width for the visible items
   let clickCounter = 0;
+
   arrow.addEventListener("click", () => {
-    const ratio = Math.floor(window.innerWidth / 270);
+    const maxOffset = (itemNumber - itemsToShow) * itemWidth;
     clickCounter++;
-    if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
-      movieLists[i].style.transform = `translateX(${
-        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
-      }px)`;
-    } else {
-      movieLists[i].style.transform = "translateX(0)";
+
+    if (clickCounter * visibleWidth > maxOffset) {
+      // Reset to start if reached the end
       clickCounter = 0;
+      movieLists[i].style.transform = "translateX(0)";
+    } else {
+      // Move to next set of items
+      movieLists[i].style.transform = `translateX(-${clickCounter * visibleWidth}px)`;
     }
   });
 
@@ -21,7 +26,6 @@ arrows.forEach((arrow, i) => {
 });
 
 //TOGGLE
-
 const ball = document.querySelector(".toggle-ball");
 const items = document.querySelectorAll(
   ".container,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle"
