@@ -238,7 +238,7 @@ def get_all_movie_details(request: Request, db: Session = Depends(get_db)):
         "tv_series": tv_series,
         "latest_movies": latest_movies,
         "search_results": [], # Initialize search_results as an empty list
-        "featured_movies": tv_series
+        "featured_movies": latest_movies
     })
 
 @app.get("/search-movies/", response_class=HTMLResponse)
