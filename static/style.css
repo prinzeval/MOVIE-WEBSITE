@@ -424,3 +424,25 @@ body {
 .carousel-prev:hover, .carousel-next:hover {
   background: rgba(0, 0, 0, 0.7);
 }
+
+
+
+
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 768px) {
+  .movie-list {
+    /* Ensure movie list takes full width */
+    width: 100%;
+  }
+
+  .movie-list-item {
+    /* Two items per row, with space for margin */
+    width: calc(50% - 20px);
+    margin: 10px;
+  }
+
+  .arrow {
+    font-size: 80px; /* Adjust arrow size for mobile */
+  }
+}
