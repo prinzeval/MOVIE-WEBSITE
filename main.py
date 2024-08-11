@@ -187,8 +187,6 @@
 
 
 
-
-
 from fastapi import FastAPI, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
@@ -196,7 +194,7 @@ import crud, schemas
 from database import SessionLocal, engine
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from uuid import UUID
 import uvicorn  
 import models
@@ -286,6 +284,10 @@ def watch_movie(movie_id: UUID, request: Request, db: Session = Depends(get_db))
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found")
     return templates.TemplateResponse("src.html", {"request": request, "movie": movie})
+
+@app.get("/favicon.ico")
+async def favicon(request: Request):
+    return Response(status_code=204)  # No Content
 
 # Run the app with Uvicorn if this file is run directly
 if __name__ == "__main__":
