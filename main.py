@@ -235,7 +235,7 @@ def get_all_movie_details(request: Request, db: Session = Depends(get_db)):
         "cartoons": cartoons,
         "tv_series": tv_series,
         "latest_movies": latest_movies,
-        "search_results": [], # Initialize search_results as an empty list
+        "search_results": [], # Initialize the search_results as an empty list 
         "featured_movies": latest_movies
     })
 
