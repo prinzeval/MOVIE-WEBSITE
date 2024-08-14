@@ -42,7 +42,9 @@
 
     <div class="container">
         <div class="player-container">
-            <iframe id="player" class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen frameborder="0" src="{{ movie.movie_link }}" scrolling="no"></iframe>
+
+            <iframe src="{{ movie.movie_link }}" frameborder="0" scrolling="no" id="player" class="player-iframe" allowfullscreen webkitallowfullscreen mozallowfullscreen sandbox="allow-same-origin allow-scripts allow-popups-to-escape-sandbox" allow="autoplay"></iframe>
+
         </div>
 
         <div class="movie-details">
