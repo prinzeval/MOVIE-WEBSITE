@@ -14,13 +14,11 @@ This project is a free movie website that allows users to browse, search, and wa
 - **Backend**: Python (FastAPI)
 - **Frontend**: HTML, CSS, JavaScript
 - **Database**: MySQL
-- **Web Scraping**: BeautifulSoup
+- **Web Scraping**: BeautifulSoup,selenium
 
 ## Setup and Installation
 
 ### Prerequisites
 
 - Python 3.x
-- MySQL
-- Node.js and npm (for frontend dependencies, if any)
 
