@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
-   
-    <title>Rumy - Movies and Series</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>v</title>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
                     </ul>
                 </div>
                 <div class="profile-container">
-                    <img class="profile-picture" src="/static/images/default-profile.png" alt="Profile Picture">
+                    <img class="profile-picture" src="" alt="Profile Picture">
                     <div class="profile-text-container">
                         <span class="profile-text">Profile</span>
                         <i class="fas fa-caret-down"></i>
@@ -53,75 +54,81 @@
 
         <!-- Search Results -->
         {% if search_results %}
-        <section class="movie-list-container">
-            <h1 class="movie-list-title">Search Results</h1>
-            <div class="movie-list-wrapper">
-                <div class="movie-list">
-                    {% for movie in search_results %}
-                    <div class="movie-list-item">
-                        <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                        <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                        <p class="movie-list-item-desc">{{ movie.description }}</p>
-                        <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                            <button>Watch Now</button>
-                        </a>
+            <section class="movie-list-container">
+                <h1 class="movie-list-title">Search Results</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for movie in search_results %}
+                            <div class="movie-list-item">
+                                <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
+                                <span class="movie-list-item-title">{{ movie.movie_title }}</span>
+                                <p class="movie-list-item-desc">{{ movie.description }}</p>
+                                <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
+                                    <button>Watch Now</button>
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </section>
+        {% endif %}
+
+        <!-- Featured Content -->
+        <!-- Featured Movies Carousel -->
+        <section class="featured-movies-carousel">
+            <div class="carousel-wrapper">
+                <div class="carousel-items">
+                    <!-- Add movie items here -->
+                    {% for movie in featured_movies %}
+                        <div class="carousel-item">
+                            <img src="{{ movie.movie_image }}" alt="{{ movie.movie_title }}">
+                            <div class="carousel-caption">
+                                <h2>{{ movie.movie_title }}</h2>
+                                <p>{{ movie.description }}</p>
+                                <a href="/watch/{{ movie.movie_id }}" class="watch-now-button">Watch Now</a>
+                            </div>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
-        </section>
-        {% endif %}
-
-        <!-- Featured Movies -->
-        <section class="featured-movies-carousel">
-            <h2 class="carousel-title">Featured Movies</h2>
-            <div class="carousel-wrapper">
-                <div class="carousel-items">
-                    {% for movie in featured_movies %}
-                    <div class="carousel-item">
-                        <img src="{{ movie.movie_image }}" alt="{{ movie.movie_title }}">
-                        <div class="carousel-caption">
-                            <h2>{{ movie.movie_title }}</h2>
-                            <p>{{ movie.description }}</p>
-                            <a href="/watch/{{ movie.movie_id }}" class="watch-now-button">Watch Now</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
             </div>
         </section>
 
         <!-- Dynamic Movie Lists -->
         {% for category, movies, title in [
-            ('anime_movies', anime_movies, 'Animes'),
-            ('asian_dramas', asian_dramas, 'Asian Dramas'),
-            ('cartoons', cartoons, 'Cartoons'),
-            ('tv_series', tv_series, 'TV Series'),
-            ('latest_movies', latest_movies, 'Latest Movies')
+            ('anime_movies', anime_movies, 'ANIMES'),
+            ('asian_dramas', asian_dramas, 'ASIAN DRAMAS'),
+            ('cartoons', cartoons, 'CARTOONS'),
+            ('tv_series', tv_series, 'TV SERIES'),
+            ('latest_movies', latest_movies, 'LATEST MOVIES')
         ] %}
-        {% if movies %}
-        <section class="movie-list-container">
-            <h1 class="movie-list-title">{{ title }}</h1>
-            <div class="movie-list-wrapper">
-                <div class="movie-list">
-                    {% for movie in movies %}
-                    <div class="movie-list-item">
-                        <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
-                        <span class="movie-list-item-title">{{ movie.movie_title }}</span>
-                        <p class="movie-list-item-desc">{{ movie.description }}</p>
-                        <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
-                            <button>Watch Now</button>
-                        </a>
+            {% if movies %}
+                <section class="movie-list-container">
+                    <h1 class="movie-list-title">{{ title }}</h1>
+                    <div class="movie-list-wrapper">
+                        <div class="movie-list">
+                            {% for movie in movies %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ movie.movie_image }}" alt="Movie Image">
+                                    <span class="movie-list-item-title">{{ movie.movie_title }}</span>
+                                    <p class="movie-list-item-desc">{{ movie.description }}</p>
+                                    <a href="/watch/{{ movie.movie_id }}" class="movie-list-item-button">
+                                        <button>Watch Now</button>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
                     </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-        {% endif %}
+                </section>
+            {% endif %}
         {% endfor %}
     </main>
 
     <script src="/static/app.js"></script>
 </body>
-
 </html>
